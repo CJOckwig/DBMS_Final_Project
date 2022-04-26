@@ -19,16 +19,16 @@ SET SQL_SAFE_UPDATES = 0;
  drop table patient_Chart;
 
 -- Schemas
- create table patient(patient_ID varchar(10), name varchar(30), room_number varchar (9), admit_date varchar(9), admit_reason varchar(50));
- create table chart(chart_id varchar(10), patient_ID varchar(10), age varchar (8), symptoms varchar (100), allergies varchar(100), medical_history varchar(100), medications varchar(40), family_illnesses varchar(40));
- create table doctor(staff_id varchar(10), specialty varchar(20), name varchar (30), address varchar (40));
- create table nurse(staff_id varchar(10), specialty varchar(20), name varchar (30),address varchar (40));
- create table clerk(staff_id varchar(10), name varchar (30), address varchar (40), wing_number varchar(5));
- create table room(room_number varchar(10), wing_number varchar(5), occupied_status varchar(1), patient_ID varchar(10));
- create table hospital_wing(wing_number varchar(5),wing_name varchar(20), care_type varchar(20));
- create table visits (admit_date varchar(9), admit_reason varchar(50), depart_date varchar(9), symptoms varchar (100));
+ create table patient(patient_ID varchar(10), first_name varchar(30), last_name varchar(30), room_number varchar (9),wing_number varchar(5), primary key(patient_ID));
+ create table chart(chart_id varchar(10), patient_ID varchar(10), age varchar (8), allergies varchar(100), medical_history varchar(100), medications varchar(40), family_illnesses varchar(40), primary key(chart_id));
+ create table doctor(staff_id varchar(10), specialty varchar(20), name varchar (30), address varchar (40), primary Key(staff_id));
+ create table nurse(staff_id varchar(10), specialty varchar(20), name varchar (30),address varchar (40), primary key(staff_id));
+ create table clerk(staff_id varchar(10), name varchar (30), address varchar (40), wing_number varchar(5), primary key(staff_id));
+ create table room(room_number varchar(10), wing_number varchar(5), occupied_status varchar(1), patient_ID varchar(10), primary key(room_number, patient_id));
+ create table hospital_wing(wing_number varchar(5),wing_name varchar(20), care_type varchar(20), primary key(wing_number));
+ create table visits (patient_ID varchar(10), admit_date varchar(9), admit_reason varchar(50), depart_date varchar(9), symptoms varchar (100), primary key (admit_date, patient_id));
 
--- Relations
+-- Relations 
  create table clerk_wing(wing_number varchar(5), staff_id varchar(10));
  create table works(staff_id varchar(10), wing_number varchar(5));
  create table wing_room(wing_number varchar(5), room_number varchar(10));
@@ -37,25 +37,24 @@ SET SQL_SAFE_UPDATES = 0;
  create table treats (staff_id varchar(10), patient_ID varchar(10));
  create table patient_Chart(chart_id varchar(10), patient_ID varchar(10));
 
-insert into patient values("p-1", "Steven Strange", "134", "4/24/22", "Car Crash, broken arms, Concussion");
-insert into patient values("p-2", "Bruce Banner", "156", "4/24/22", " muscle pain, nausea, jaundice");
-insert into patient values("p-3", "Peter Parker", "079", "4/24/22", "Coughing up black mucus");
-insert into patient values("p-4", "Selina Kyle", "156", "4/24/22", "anaphylectic shock caused by cat allergy");
-insert into patient values("p-5", "Oliver Queen", "334", "4/24/22", "finger arthritis");
-insert into patient values("p-6", "Wade Wilson", "132", "4/24/22", "Cancer");
-insert into patient values("p-7", "Barry Allen", "334", "4/24/22", "Severe Fatigue, Cough");
-insert into patient values("p-8", "Bruce Wayne", "111", "4/24/22", "Insomnia, Cough");
-insert into patient values("p-9", "Steve Rogers", "001", "4/24/22", "Dementia");
-insert into patient values("p-10", "Tony Stark", "122", "4/24/22", "Heart Palpitations, extreme fatigue");
-insert into patient values("p-11", "Clark Kent", "233", "4/24/22", "Heart Palpitations, extreme fatigue");
+insert into patient values("p-1", "Steven","Strange", "134", "4/24/22");
+insert into patient values("p-2", "Bruce","Banner", "156", "4/24/22", " muscle pain, nausea, jaundice");
+insert into patient values("p-3", "Peter","Parker", "079", "4/24/22", "Coughing up black mucus");
+insert into patient values("p-4", "Selina","Kyle", "156", "4/24/22", "anaphylectic shock caused by cat allergy");
+insert into patient values("p-5", "Oliver","Queen", "334", "4/24/22", "finger arthritis");
+insert into patient values("p-6", "Wade","Wilson", "132", "4/24/22", "Cancer");
+insert into patient values("p-7", "Barry","Allen", "334", "4/24/22", "Severe Fatigue, Cough");
+insert into patient values("p-8", "Bruce","Wayne", "111", "4/24/22", "Insomnia, Cough");
+insert into patient values("p-9", "Steve","Rogers", "001", "4/24/22", "Dementia");
+insert into patient values("p-10", "Tony","Stark", "122", "4/24/22", "Heart Palpitations, extreme fatigue");
+insert into patient values("p-11", "Clark","Kent", "233", "4/24/22", "Heart Palpitations, extreme fatigue");
 
-select * from patient order by room_number;
 -- create table chart
 -- (chart_id varchar(10), patient_ID varchar(10), 
 -- age varchar (8), symptoms varchar (30), allergies varchar(30), 
 -- medical_history varchar(40), medications varchar(40), family_illnesses varchar(40));
-insert into chart values("c-1", "p-1", "43", "cough, broken arms, dazed and confused", "NO ALLERGIES", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO FAMILY ILLNESS");
-insert into chart values("c-2", "p-2", "39", "extreme fatigue, muscle pain, overall 'green'", "NO ALLERGIES", "Gamma Exposure in 2012", "NO MEDICATION", "NO FAMILY ILLNESS");
+insert into chart values("c-1", "p-1", "43", "NO ALLERGIES", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO FAMILY ILLNESS");
+insert into chart values("c-2", "p-2", "39",  "NO ALLERGIES", "Gamma Exposure in 2012", "NO MEDICATION", "NO FAMILY ILLNESS");
 insert into chart values("c-3", "p-3", "21", "Severe Cough, tight muscles, extreme fatigue, spider bite, light sensitivity", "ALLERGIC TO SPIDERS AND PENICLLIN", "Bit by radioactive spider in 2017", "NO MEDICATION", "PARENTS DIED IN CAR ACCIDENT");
 insert into chart values("c-4", "p-4", "29", "Severe reaction to cat scratch", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
 insert into chart values("c-5", "p-5", "32", "arthritis in fingers", "NO ALLERGIES", "Gunshot Wound 2012, arthritis ", "cortisone shot", "NO FAMILY ILLNESS");
@@ -64,7 +63,7 @@ insert into chart values("c-7", "p-7", "29", "'jittery', heart palpitation's, se
 insert into chart values("c-8", "p-8", "44", "Insomnia, Fever, headache", "NO ALLERGIES", "Body Covered in scar tissue", "20 mg lexapro", "NO FAMILY ILLNESS");
 insert into chart values("c-9", "p-9", "88", "Insomnia, Muscle Pain, dementia", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
 insert into chart values("c-10", "p-10", "29", "Heartburn, cough, heart palpitations", "NO ALLERGIES", "Hit by bomb Shrapnel (2012), metal plate located in chest", "NO MEDICATION", "crohns(M)");
-insert into chart values("c-10", "p-10", "29", "Heavy Chest, difficulty breathing, red eyes", "kyptonite", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO TRACEABLE FAMILY");
+insert into chart values("c-11", "p-11", "29", "Heavy Chest, difficulty breathing, red eyes", "kyptonite", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO TRACEABLE FAMILY");
 
 
 -- create table nurse(staff_id varchar(10), specialty varchar(20), name varchar (30),address varchar (40));
@@ -93,7 +92,10 @@ insert into room values("263", "2", "1", "p-7");
 insert into room values("111", "2", "1", "p-8");
 insert into room values("001", "2", "1", "p-9");
 insert into room values("001", "4", "1", "p-10");
-insert into room values("233", "4", "1", "p-11");
+insert into room values("233", "4", "1", "");
+insert into room values("005", "4", "0", "");
+insert into room values("007", "4", "0", "");
+insert into room values("008", "4", "0", "");
 
 -- create table hospital_wing(wing_number varchar(5),wing_name varchar(20), care_type varchar(20));
 insert into hospital_wing values ("1", "North", "infant care");
@@ -102,6 +104,23 @@ insert into hospital_wing values ("3", "South", "Cancer");
 insert into hospital_wing values ("4", "West", "urgent care");
 
 
--- create table visits (patient_ID varchar(10), admit_date varchar(9), admit_reason varchar(50), depart_date varchar(9), symptoms varchar (100));
-insert into visits values("p-9", "2/12/1979", "Car Accident", "2/14/1979", "Dizzy, hazy thoughts");
-insert into visits values("079", "1/31/2017", "Spider bite", "1/31/2017", "Swelling, Rash");
+-- create table visits (patient_ID varchar(10), admit_date varchar(9), admit_reason varchar(50), depart_date varchar(9), symptoms varchar (100), primary key (admit_date, patient_id));
+insert into visits values("p-1", "4/24/22", "Car Crash, broken arms, Concussion","", "cough, broken arms, dazed and confused");
+insert into visits values("p-2", "4/24/22", "Extreme muscle cramping","", "extreme fatigue, muscle pain, overall 'green'");
+insert into visits values("p-3", "4/24/22", "Coughing up black mucus", "", "cough, fever, headache");
+insert into visits values("p-4", "4/24/22", "anaphylectic shock caused by cat allergy", "", "Fever, Rash");
+insert into visits values("p-5", "4/24/22", "finger arthritis", "", "stiff joints");
+insert into visits values("p-6", "4/24/22", "Cancer");
+insert into visits values("p-7", "Barry","Allen", "334", "4/24/22", "Severe Fatigue, Cough");
+insert into visits values("p-8", "Bruce","Wayne", "111", "4/24/22", "Insomnia, Cough");
+insert into visits values("p-9", "Steve","Rogers", "001", "4/24/22", "Dementia");
+insert into visits values("p-10", "Tony","Stark", "122", "4/24/22", "Heart Palpitations, extreme fatigue");
+insert into visits values("p-11", "Clark","Kent", "233", "4/24/22", "Heart Palpitations, extreme fatigue");
+
+
+Select p.first_name, p.last_name, room_number, wing_number
+From patient p natural join hospital_wing natural join chart
+Where ((wing_number = '2') and (symptoms LIKE '%cough%'));
+
+
+
