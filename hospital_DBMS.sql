@@ -37,17 +37,19 @@ SET SQL_SAFE_UPDATES = 0;
  create table treats (staff_id varchar(10), patient_ID varchar(10));
  create table patient_Chart(chart_id varchar(10), patient_ID varchar(10));
 
-insert into patient values("p-1", "Steven","Strange", "134", "4/24/22");
-insert into patient values("p-2", "Bruce","Banner", "156", "4/24/22", " muscle pain, nausea, jaundice");
-insert into patient values("p-3", "Peter","Parker", "079", "4/24/22", "Coughing up black mucus");
-insert into patient values("p-4", "Selina","Kyle", "156", "4/24/22", "anaphylectic shock caused by cat allergy");
-insert into patient values("p-5", "Oliver","Queen", "334", "4/24/22", "finger arthritis");
-insert into patient values("p-6", "Wade","Wilson", "132", "4/24/22", "Cancer");
-insert into patient values("p-7", "Barry","Allen", "334", "4/24/22", "Severe Fatigue, Cough");
-insert into patient values("p-8", "Bruce","Wayne", "111", "4/24/22", "Insomnia, Cough");
-insert into patient values("p-9", "Steve","Rogers", "001", "4/24/22", "Dementia");
-insert into patient values("p-10", "Tony","Stark", "122", "4/24/22", "Heart Palpitations, extreme fatigue");
-insert into patient values("p-11", "Clark","Kent", "233", "4/24/22", "Heart Palpitations, extreme fatigue");
+
+-- create table patient(patient_ID varchar(10), first_name varchar(30), last_name varchar(30), room_number varchar (9),wing_number varchar(5), primary key(patient_ID));
+insert into patient values("p-1", "Steven","Strange", "134","1");
+insert into patient values("p-2", "Bruce","Banner", "156","1");
+insert into patient values("p-3", "Peter","Parker", "079","3");
+insert into patient values("p-4", "Selina","Kyle", "156","1");
+insert into patient values("p-5", "Oliver","Queen", "334","3");
+insert into patient values("p-6", "Wade","Wilson", "132","2");
+insert into patient values("p-7", "Barry","Allen", "334","3");
+insert into patient values("p-8", "Bruce","Wayne", "111","2");
+insert into patient values("p-9", "Steve","Rogers", "001","4");
+insert into patient values("p-10", "Tony","Stark", "001", "4");
+insert into patient values("p-11", "Clark","Kent", "233", "4");
 
 -- create table chart
 -- (chart_id varchar(10), patient_ID varchar(10), 
@@ -55,15 +57,15 @@ insert into patient values("p-11", "Clark","Kent", "233", "4/24/22", "Heart Palp
 -- medical_history varchar(40), medications varchar(40), family_illnesses varchar(40));
 insert into chart values("c-1", "p-1", "43", "NO ALLERGIES", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO FAMILY ILLNESS");
 insert into chart values("c-2", "p-2", "39",  "NO ALLERGIES", "Gamma Exposure in 2012", "NO MEDICATION", "NO FAMILY ILLNESS");
-insert into chart values("c-3", "p-3", "21", "Severe Cough, tight muscles, extreme fatigue, spider bite, light sensitivity", "ALLERGIC TO SPIDERS AND PENICLLIN", "Bit by radioactive spider in 2017", "NO MEDICATION", "PARENTS DIED IN CAR ACCIDENT");
-insert into chart values("c-4", "p-4", "29", "Severe reaction to cat scratch", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
-insert into chart values("c-5", "p-5", "32", "arthritis in fingers", "NO ALLERGIES", "Gunshot Wound 2012, arthritis ", "cortisone shot", "NO FAMILY ILLNESS");
-insert into chart values("c-6", "p-6", "29", "Severe reaction to cat scratch", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
-insert into chart values("c-7", "p-7", "29", "'jittery', heart palpitation's, seizures", "NO ALLERGIES", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "crohns(M)");
-insert into chart values("c-8", "p-8", "44", "Insomnia, Fever, headache", "NO ALLERGIES", "Body Covered in scar tissue", "20 mg lexapro", "NO FAMILY ILLNESS");
-insert into chart values("c-9", "p-9", "88", "Insomnia, Muscle Pain, dementia", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
-insert into chart values("c-10", "p-10", "29", "Heartburn, cough, heart palpitations", "NO ALLERGIES", "Hit by bomb Shrapnel (2012), metal plate located in chest", "NO MEDICATION", "crohns(M)");
-insert into chart values("c-11", "p-11", "29", "Heavy Chest, difficulty breathing, red eyes", "kyptonite", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO TRACEABLE FAMILY");
+insert into chart values("c-3", "p-3", "21", "ALLERGIC TO SPIDERS AND PENICLLIN", "Bit by radioactive spider in 2017", "NO MEDICATION", "PARENTS DIED IN CAR ACCIDENT");
+insert into chart values("c-4", "p-4", "29", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
+insert into chart values("c-5", "p-5", "32", "NO ALLERGIES", "Gunshot Wound 2012, arthritis ", "cortisone shot", "NO FAMILY ILLNESS");
+insert into chart values("c-6", "p-6", "29", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
+insert into chart values("c-7", "p-7", "29",  "NO ALLERGIES", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "crohns(M)");
+insert into chart values("c-8", "p-8", "44", "NO ALLERGIES", "Body Covered in scar tissue", "NO MEDICATION", "NO FAMILY ILLNESS");
+insert into chart values("c-9", "p-9", "88", "ALLERGIC TO CATS", "NO SIGNIFICANT HISTORY", "20 mg lexapro", "NO FAMILY ILLNESS");
+insert into chart values("c-10", "p-10", "29", "NO ALLERGIES", "Hit by bomb Shrapnel (2012), metal plate located in chest", "NO MEDICATION", "crohns(M)");
+insert into chart values("c-11", "p-11", "29", "kyptonite", "NO SIGNIFICANT HISTORY", "NO MEDICATION", "NO TRACEABLE FAMILY");
 
 
 -- create table nurse(staff_id varchar(10), specialty varchar(20), name varchar (30),address varchar (40));
@@ -82,7 +84,7 @@ insert into doctor values("S-D-4", "General Praction", "Velma Dinkley", "9975 dr
 
  -- create table room(room_number varchar(10), wing_number varchar(5), occupied_status varchar(1), patient_ID varchar(10));
 
-insert into room values("134", "1", "1", "p-1");
+insert into room values("134", "1", "2", "p-1");
 insert into room values("156", "1", "1", "p-2");
 insert into room values("079", "3", "1", "p-3");
 insert into room values("134", "1", "2", "p-4");
@@ -90,8 +92,8 @@ insert into room values("334", "3", "1", "p-5");
 insert into room values("132", "2", "1", "p-6");
 insert into room values("263", "2", "1", "p-7");
 insert into room values("111", "2", "1", "p-8");
-insert into room values("001", "2", "1", "p-9");
-insert into room values("001", "4", "1", "p-10");
+insert into room values("001", "2", "2", "p-9");
+insert into room values("001", "4", "2", "p-10");
 insert into room values("233", "4", "1", "");
 insert into room values("005", "4", "0", "");
 insert into room values("007", "4", "0", "");
@@ -110,17 +112,13 @@ insert into visits values("p-2", "4/24/22", "Extreme muscle cramping","", "extre
 insert into visits values("p-3", "4/24/22", "Coughing up black mucus", "", "cough, fever, headache");
 insert into visits values("p-4", "4/24/22", "anaphylectic shock caused by cat allergy", "", "Fever, Rash");
 insert into visits values("p-5", "4/24/22", "finger arthritis", "", "stiff joints");
-insert into visits values("p-6", "4/24/22", "Cancer");
-insert into visits values("p-7", "Barry","Allen", "334", "4/24/22", "Severe Fatigue, Cough");
-insert into visits values("p-8", "Bruce","Wayne", "111", "4/24/22", "Insomnia, Cough");
-insert into visits values("p-9", "Steve","Rogers", "001", "4/24/22", "Dementia");
-insert into visits values("p-10", "Tony","Stark", "122", "4/24/22", "Heart Palpitations, extreme fatigue");
-insert into visits values("p-11", "Clark","Kent", "233", "4/24/22", "Heart Palpitations, extreme fatigue");
+insert into visits values("p-6", "4/24/22", "Cancer", "", "Fever, headache, cough" );
+insert into visits values("p-7", "4/24/22", "'jittery', heart palpitation's, seizures", "","Severe Fatigue, Cough");
+insert into visits values("p-8", "4/24/22", "Insomnia","", "Insomnia, Fever, headache" );
+insert into visits values("p-9", "4/24/22", "Dementia", "", "Confusion, arthritis, mild cough");
+insert into visits values("p-10","4/24/22", "Heart Palpitations, extreme fatigue", "", "Heartburn, cough, heart palpitations");
+insert into visits values("p-11", "4/24/22", "Heart Palpitations, extreme fatigue", "","Heavy Chest, difficulty breathing, red eyes");
 
-
-Select p.first_name, p.last_name, room_number, wing_number
-From patient p natural join hospital_wing natural join chart
-Where ((wing_number = '2') and (symptoms LIKE '%cough%'));
 
 
 
