@@ -101,3 +101,7 @@ insert into hospital_wing values ("2", "East", "general care");
 insert into hospital_wing values ("3", "South", "Cancer");
 insert into hospital_wing values ("4", "West", "urgent care");
 
+
+-- create table visits (patient_ID varchar(10), admit_date varchar(9), admit_reason varchar(50), depart_date varchar(9), symptoms varchar (100));
+insert into visits values("p-9", "2/12/1979", "Car Accident", "2/14/1979", "Dizzy, hazy thoughts");
+insert into visits values("079", "1/31/2017", "Spider bite", "1/31/2017", "Swelling, Rash");
